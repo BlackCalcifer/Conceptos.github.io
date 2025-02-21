@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Pantalla de precarga */
+#preloader {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #c41a30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+#preloader img {
+    width: 200px;
+    height: auto;
+    margin: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.container {
+    display: none;
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen de conceptos */
+h1 img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.semestres {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.semestres button {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.semestres button:hover {
+    background: #0056b3;
+}
+
+/* Estilos del footer */
+footer {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #666;
+}
