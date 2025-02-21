@@ -84,19 +84,19 @@ footer {
     color: #666;
 }
 
-/* 🔹📱 Ajustes para móviles */
 @media (max-width: 768px) {
-    .container {
-        width: 95%;
-        padding: 15px;
-    }
-
     .semestres {
-        grid-template-columns: 1fr; /* Se coloca en una sola columna */
+        display: flex; /* Cambio a flexbox */
+        flex-direction: column; /* Apila los botones verticalmente */
+        align-items: center; /* Centra los botones en la pantalla */
+        gap: 10px; /* Espaciado entre botones */
     }
 
     .semestres button {
-        font-size: 12px;
-        padding: 8px;
+        width: 100%; /* Hace que los botones ocupen todo el ancho disponible */
+        max-width: 300px; /* Opcional: limita el tamaño máximo */
+        font-size: 14px; /* Ajusta el tamaño del texto */
+        padding: 10px; /* Ajusta el relleno */
     }
 }
+
