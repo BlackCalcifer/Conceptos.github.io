@@ -14,19 +14,20 @@ body {
     overflow-x: hidden; /* Evita desplazamiento horizontal */
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
 
 /* Contenedor principal ocupa toda la pantalla */
 .container {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
 }
 
-/* Logo en la parte superior */
+/* Logo centrado */
 header {
     width: 100%;
     display: flex;
@@ -36,22 +37,23 @@ header {
 
 .logo {
     width: 100%;
-    max-width: 500px;
+    max-width: 350px;
     height: auto;
 }
 
 /* Botón de regreso */
 .back-button {
     position: fixed;
-    top: 15px;
-    left: 15px;
+    top: 10px;
+    left: 10px;
     background: none;
     border: none;
     cursor: pointer;
+    z-index: 10; /* Asegura que siempre esté visible */
 }
 
 .back-button img {
-    width: 50px;
+    width: 40px;
     height: auto;
     transition: transform 0.2s ease-in-out;
 }
@@ -64,48 +66,53 @@ header {
 .content-wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
-    width: 90%;
+    width: 95%;
     max-width: 1200px;
     gap: 20px;
-    flex-grow: 1;
 }
 
 /* Recuadros con fondo blanco */
 .box {
     flex: 1 1 300px;
-    padding: 20px;
+    padding: 15px;
     background-color: white;
-    border-radius: 15px;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.4s ease-in-out;
-    text-align: left;  /* 🔥 Ahora los textos están alineados a la izquierda */
-    min-height: 200px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    text-align: left;
+    min-height: 180px;
+    width: 100%;
 }
 
 .box:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* Imagen alineada a la derecha */
 .image-container {
     flex-shrink: 0;
-    max-width: 400px;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 .asis-image {
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     height: auto;
-    border-radius: 15px;
-    transition: transform 0.4s ease-in-out;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
     cursor: pointer;
 }
 
 /* Zoom fuerte al pasar el mouse */
-.asis-image:hover {
-    transform: scale(1.8);
+@media (min-width: 768px) { 
+    .asis-image:hover {
+        transform: scale(1.8);
+    }
 }
 
 /* Imagen en pantalla completa */
@@ -117,7 +124,7 @@ header {
     max-width: 90%;
     max-height: 90%;
     z-index: 999;
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 4px 8px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -131,6 +138,7 @@ header {
     z-index: 998;
     display: none;
 }
+
 /* Estilo para el enlace del ASIS */
 .asis-link {
     color: #007BFF;
@@ -142,4 +150,35 @@ header {
 .asis-link:hover {
     text-decoration: underline;
     color: #0056b3;
+}
+
+/* RESPONSIVE: Ajustes para móviles */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .logo {
+        max-width: 280px;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .box {
+        width: 100%;
+        text-align: left;
+        min-height: auto;
+    }
+
+    .asis-image {
+        max-width: 250px;
+    }
+
+    .back-button img {
+        width: 35px;
+    }
 }
