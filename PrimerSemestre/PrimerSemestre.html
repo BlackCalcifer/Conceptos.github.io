@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primer Semestre</title>
+    <link rel="stylesheet" href="PrimerSemestre.css">
+</head>
+<body>
 
+    <header>
+        <img src="../conceptos.png" alt="Conceptos" class="logo">
+    </header>
+
+    <button class="back-button" onclick="window.location.href='../index.html'">
+        <img src="../atras.png" alt="Atrás">
+    </button>
+
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="box">
+                <h1>Introducción</h1>
+                <p>En este primer semestre, es muy probable que te enfrentes a tu primera guía de trabajo en grupo, donde analizarán la situación en salud de un departamento. Para ello, necesitarás aprender a recopilar, interpretar y presentar información clave. ¡Aquí te ayudaremos a entender cómo hacerlo!</p>
+            </div>
+            <div class="image-container">
+                <img src="asis.png" alt="Proceso ASIS" class="asis-image" onclick="openFullscreen(this)">
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="box">
+                <h2>¿Qué es el ASIS y cómo funciona?</h2>
+                <p>El <strong>Análisis de Situación de Salud (ASIS)</strong> es un proceso clave para evaluar el estado de salud de una población. Su objetivo es identificar problemas prioritarios y ayudar en la toma de decisiones para mejorar la calidad de vida.</p>
+				<p>Puedes leer más sobre el ASIS en el siguiente enlace:  
+						<a href="https://www.minsalud.gov.co/plandecenal/paginas/asis.aspx" target="_blank" class="asis-link">Consulta aquí</a>
+				</p>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="box">
+                <h3>Pasos del ASIS</h3>
+                <ul>
+                    <li><strong>Recolección de información:</strong> Uso de bases de datos, encuestas y registros médicos.</li>
+                    <li><strong>Análisis de datos:</strong> Interpretación de la información para detectar tendencias.</li>
+                    <li><strong>Identificación de problemas:</strong> Evaluación de factores que afectan la salud de la comunidad.</li>
+                    <li><strong>Propuesta de intervenciones:</strong> Diseño de estrategias para mejorar la salud pública.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fondo oscuro para la imagen en pantalla completa -->
+    <div class="overlay" id="overlay" onclick="closeFullscreen()"></div>
+
+    <script>
+        function openFullscreen(img) {
+            let overlay = document.getElementById("overlay");
+            let fullscreenImg = document.createElement("img");
+            fullscreenImg.src = img.src;
+            fullscreenImg.classList.add("fullscreen");
+            fullscreenImg.onclick = closeFullscreen;
+
+            document.body.appendChild(fullscreenImg);
+            overlay.style.display = "block";
+        }
+
+        function closeFullscreen() {
+            let overlay = document.getElementById("overlay");
+            let fullscreenImg = document.querySelector(".fullscreen");
+            if (fullscreenImg) {
+                fullscreenImg.remove();
+            }
+            overlay.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

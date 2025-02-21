@@ -1,0 +1,145 @@
+/* Reset de márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo blanco y pantalla completa */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden; /* Evita desplazamiento horizontal */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenedor principal ocupa toda la pantalla */
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Logo en la parte superior */
+header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+/* Botón de regreso */
+.back-button {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.back-button img {
+    width: 50px;
+    height: auto;
+    transition: transform 0.2s ease-in-out;
+}
+
+.back-button:hover {
+    transform: scale(1.1);
+}
+
+/* Contenido organizado en filas */
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    max-width: 1200px;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+/* Recuadros con fondo blanco */
+.box {
+    flex: 1 1 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease-in-out;
+    text-align: left;  /* 🔥 Ahora los textos están alineados a la izquierda */
+    min-height: 200px;
+}
+
+.box:hover {
+    transform: scale(1.1);
+}
+
+/* Imagen alineada a la derecha */
+.image-container {
+    flex-shrink: 0;
+    max-width: 400px;
+}
+
+.asis-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 15px;
+    transition: transform 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+/* Zoom fuerte al pasar el mouse */
+.asis-image:hover {
+    transform: scale(1.8);
+}
+
+/* Imagen en pantalla completa */
+.fullscreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 90%;
+    z-index: 999;
+    border-radius: 15px;
+    box-shadow: 4px 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+    display: none;
+}
+/* Estilo para el enlace del ASIS */
+.asis-link {
+    color: #007BFF;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.asis-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
