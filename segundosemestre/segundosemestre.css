@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 10;
+    padding: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+.titulo {
+    text-align: center;
+    font-size: 24px; /* Aumenté el tamaño del título */
+    font-weight: bold;
+    color: red;
+    margin-bottom: 20px;
+}
+
+.contenedor-secciones {
+    display: flex;
+    gap: 10px; /* Espacio entre secciones */
+    width: 90vw;
+    height: auto; /* Evita que tenga un alto fijo */
+}
+
+.seccion {
+    border: 1px solid black;
+    padding: 20px; /* Aumenté el padding */
+    margin-bottom: 15px;
+    border-radius: 5px;
+    flex: 1; /* Cada sección ocupa el mismo espacio */
+	font-size: 12px; /* Aumenté el tamaño del título */
+	
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 1px;
+	border-radius: 2px;
+    margin-top: 2px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 6px; /* Ajusta el espacio interno */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.fila {
+    display: flex;
+    gap: 15px; /* Aumenté el espacio entre campos */
+    margin-top: 10px;
+}
+
+.campo {
+    flex: 1;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px; /* Aumenté el padding */
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px; /* Aumenté el margen superior */
+    font-size: 16px; /* Aumenté el tamaño de la fuente */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p {
+    font-size: 1.25em; /* 1.5 veces el tamaño predeterminado */
+}
+
+h4 {
+    font-size: 17px; /* 1.5 veces el tamaño predeterminado */
+}
+
+h5 {
+    font-size: 15px; /* 1.5 veces el tamaño predeterminado */
+    margin-top: 3px;
+	margin-bottom: 3px; /* Margen abajo */
+}
+
+.titulo {
+    font-size: 25px; /* Ajusta el tamaño según lo necesites */
+    color: red;
+}
+.campo.inline {
+    display: flex;
+    align-items: center; /* Alinea el texto y el textarea en la misma línea */
+    gap: 10px; /* Espacio entre el label y el textarea */
+}
+
+.campo.inline label {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+.campo.inline textarea {
+    flex: 1; /* Permite que el textarea ocupe el espacio disponible */
+    width: auto; /* Evita que el textarea tenga un ancho del 100% */
+}
