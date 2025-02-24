@@ -43,7 +43,7 @@
 		</p>
         <div class="formulario">
         <div class="titulo">FORMULARIO DE VALORACIÓN DE AGENTES DE AUTOCUIDADO</div>
-        <div class="contenedor-secciones">
+        <div class="contenedor-secciones1">
             <!-- Primera sección -->
             <div class="seccion">
                 <h5>INFORMACIÓN BÁSICA</h5>
@@ -263,19 +263,384 @@
 								<option value="NO APLICA">NO APLICA</option>
 							</select>
 					</div>
-					
-					
-					
-				<!-- esto no se toca -->
-                <button onclick="imprimirPagina()">Descargar o Imprimir</button>
-				
-		
-    <script>
-        function imprimirPagina() {
-            window.print();
-        }
-    </script>
 			</div>
+    </div>
+	<!-- tercera sección -->
+	<div class="contenedor-secciones1">
+		<div class="seccion">
+				<table>
+					<tr>
+						<th colspan="4">Régimen farmacológico ambulatorio</th> <!-- Encabezado que ocupa las 4 columnas -->
+					</tr>
+
+					<tr>
+						<th>Nombre</th> <!-- Primera columna: Nombre del medicamento -->
+						<th>Dosis</th> <!-- Segunda columna: Cantidad a tomar -->
+						<th>Vía</th> <!-- Tercera columna: Método de administración (oral, inyectado, etc.) -->
+						<th>¿Hace cuánto lo toma?</th> <!-- Cuarta columna: Tiempo de consumo -->
+					</tr>
+
+					<tr>
+						<td><input type="text"></td> <!-- Campo editable para Nombre -->
+						<td><input type="text"></td> <!-- Campo editable para Dosis -->
+						<td><input type="text"></td> <!-- Campo editable para Vía -->
+						<td><input type="text"></td> <!-- Campo editable para Hace cuánto lo toma -->
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+				</table>
+				<h5>Actualmente está hospitalizado para:</h5>
+				<div class="fila">
+					<div class="campo inline">
+							<label for="edad">Dx:</label>
+							<input type="text" id="Dx">
+						</div>
+						<div class="campo inline">
+							<label for="escolaridad">Tto. Medico:</label>
+							<input type="text" id="Tto Medico">
+						</div>
+						<div class="campo inline">
+							<label for="ocupacion">Tto. Quirúrgico:</label>
+							<input type="text" id="Tto Quirúrgico">
+						</div>
+						<div class="campo inline">
+							<label for="ocupacion">Otro:</label>
+							<input type="text" id="Otro">
+						</div>
+					</div>
+				<table>
+					<tr>
+						<th colspan="4">Régimen farmacológico Hospitalario</th> <!-- Encabezado que ocupa las 4 columnas -->
+					</tr>
+
+					<tr>
+						<th>Nombre</th> <!-- Primera columna: Nombre del medicamento -->
+						<th>Dosis</th> <!-- Segunda columna: Cantidad a tomar -->
+						<th>Vía</th> <!-- Tercera columna: Método de administración (oral, inyectado, etc.) -->
+						<th>¿Hace cuánto lo toma?</th> <!-- Cuarta columna: Tiempo de consumo -->
+					</tr>
+
+					<tr>
+						<td><input type="text"></td> <!-- Campo editable para Nombre -->
+						<td><input type="text"></td> <!-- Campo editable para Dosis -->
+						<td><input type="text"></td> <!-- Campo editable para Vía -->
+						<td><input type="text"></td> <!-- Campo editable para Hace cuánto lo toma -->
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+					</tr>
+				</table>
+				<h4>2. PATRÓN DE NUTRICIÓN Y METABOLISMO</h4>
+				<p></p>
+				<h5>A. Requisitos Universales: Mantenimiento de un aporte suficiente de agua y alimentos</h5>
+				<div class="fila">
+					<div class="campo inline">
+							<label for="edad">¿Cuántas comidas consume al día?:</label>
+							<input type="text" id="Cuántas comidas consume al día">
+						</div>
+						<div class="campo inline">
+							<label for="escolaridad">¿Qué alimentos consume?</label>
+							<textarea id="textarea" rows="3"></textarea>
+						</div>
+				</div>
+					<div class="campo">
+						<label for="escolaridad">¿Qué líquidos generalmente consume?</label>
+						<input type="text" id="Qué líquidos generalmente consume">
+					</div>
+					<div class="fila">
+						<div class="campo inline">
+							<label>¿Ha tenido cambios en el peso en el último año?</label>
+								<select id="rol" name="rol">
+									<option value="">Seleccione...</option>
+									<option value="SI">SI</option>
+									<option value="NO">NO</option>
+								</select>
+						</div>
+						<div class="campo inline">
+							<label for="escolaridad">Amplie</label>
+							<textarea id="textarea" rows="3"></textarea>
+						</div>
+					</div>	
+					<div class="fila">
+						<div class="campo inline">
+							<label>¿Cómo es actualmente su apetito?</label>
+								<select id="rol" name="rol">
+									<option value="">Seleccione...</option>
+									<option value="EXCELENTE">EXCELENTE</option>
+									<option value="MUY BUENO">MUY BUENO</option>
+									<option value="BUENO">BUENO</option>
+									<option value="NORMAL">NORMAL</option>
+									<option value="REGULAR">REGULAR</option>
+									<option value="MALO">MALO</option>
+									<option value="MUY MALO">MUY MALO</option>
+									<option value="NO TENGO APETITO">NO TENGO APETITO</option>
+								</select>
+						</div>
+						<div class="campo">
+							<label for="escolaridad">Talla en cm:</label>
+							<input type="text" id="TALLA">
+						</div>
+						<div class="campo">
+							<label for="escolaridad">Peso en kg:</label>
+							<input type="text" id="PESO">
+						</div>
+					</div>
+					<div class="campo">
+						<label for="edad">Caracteristicas del Cabello:</label>
+						<input type="text" id="Cuántas comidas consume al día">
+					</div>
+					<div class="fila">
+						<div class="campo">
+							<label for="escolaridad">Color de piel:</label>
+							<input type="text" id="Color de piel">
+						</div>
+						<div class="campo">
+							<label for="escolaridad">Turgencia:</label>
+							<input type="text" id="Turgencia">
+						</div>
+					</div>
+					<div class="campo">
+							<label for="escolaridad">Describa lesiones de tejidos blandos distintas a UPP:</label>
+							<input type="textarea" id="Turgencia">
+					</div>
+					<div class="campo">
+							<label for="escolaridad">Describa UPP (Localización, tamaño y grado según escala de Barczak):</label>
+							<input type="textarea" id="Turgencia">
+					</div>
+		</div>
+	<!-- cuarta sección -->
+		<div class="seccion">
+				<table class="escala-barczak">
+					<tr>
+						<th>Grado</th>
+						<th>ESCALA DE BARCZAK</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Piel intacta con enrojecimiento después de una hora de alivio de la presión</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Ampollas o abrasión con o sin infección</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Destrucción de tejido subcutáneo con o sin infección</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Compromiso óseo o articular con o sin infección</td>
+					</tr>
+				</table>
+				<h5>Determine el riesgo para desarrollar UPP (según Escala de Braden)</h5>	
+				<table class="escala-braden">
+					<tr>
+						<th>ASPECTOS</th>
+						<th>1</th>
+						<th>2</th>
+						<th>3</th>
+						<th>4</th>
+						<th>TOTAL</th>
+					</tr>
+					<tr>
+						<td>Percepción sensorial</td>
+						<td>Completamente limitado</td>
+						<td>Muy limitado</td>
+						<td>Levemente limitado</td>
+						<td>Ninguna limitación</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Exposición a la humedad</td>
+						<td>Excesivamente húmeda</td>
+						<td>Muy húmeda</td>
+						<td>Ocasionalmente húmeda</td>
+						<td>Raramente húmeda</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Actividad</td>
+						<td>Completamente inmóvil</td>
+						<td>Confinado a silla</td>
+						<td>Camina ocasionalmente</td>
+						<td>Camina frecuentemente</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Movilidad</td>
+						<td>Completamente inmóvil</td>
+						<td>Muy limitado</td>
+						<td>Levemente limitado</td>
+						<td>Ninguna limitación</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Nutrición</td>
+						<td>Deficiente</td>
+						<td>Inadecuada</td>
+						<td>Adecuada</td>
+						<td>Excelente</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Fricción y cizallamiento</td>
+						<td>Problema requiere máximo cuidado</td>
+						<td>Problema potencial requiere mínimo cuidado</td>
+						<td colspan="2">Sin problema aparente</td>
+						<td></td>
+					</tr>
+					<tr class="interpretacion">
+						<td colspan="6">
+							<b>Interpretación de Resultados: TOTAL</b> <br>
+							Alto riesgo ≤ 12 | Riesgo moderado 13-14 | Bajo riesgo 15-16 | Sin riesgo > 16
+						</td>
+					</tr>
+				</table>
+				<div class="campo">
+					<label for="escolaridad">Características de labios, mucosa oral, lengua:</label>
+					<input type="textarea" id="Características de labios">
+				</div>
+				<div class="campo">
+					<label for="escolaridad">Integridad de la dentadura e higiene oral. Describa</label>
+					<input type="textarea" id="Integridad de la dentadura">
+				</div>
+				<div class="fila">
+					<div class="campo inline">
+						<label for="edad">Reflejo de deglución:</label>
+						<input type="text" id="Reflejo de deglución">
+					</div>
+					<div class="campo inline">
+						<label for="escolaridad">Reflejo nauseoso</label>
+						<input type="text" id="Reflejo nauseoso">
+					</div>
+				</div>
+				<div class="campo inline">
+						<label for="escolaridad">Percepción de sabores</label>
+						<input type="text" id="Percepción de sabores">
+					</div>
+				<h5>Examen de abdomen. Describa:</h5>
+				<div class="fila">
+					<div class="campo inline">
+						<label for="edad">Forma:</label>
+						<input type="text" id="Forma">
+					</div>
+					<div class="campo inline">
+						<label for="escolaridad">Simetría</label>
+						<input type="text" id="Simetría">
+					</div>
+					<div class="campo inline">
+						<label for="escolaridad">Volumen</label>
+						<input type="text" id="Volumen">
+					</div>
+				</div>
+				<div class="campo inline">
+					<label for="escolaridad">Tipo de dieta que recibe actualmente:</label>
+					<input type="text" id="Tipo de dieta que recibe actualmente">
+				</div>
+				<div class="campo inline">
+					<label for="escolaridad">Volumen de líquidos ordenados en las últimas 24 horas</label>
+					<input type="text" id="Volumen de líquidos ordenados en las últimas 24 horas">
+				</div>
+				<div class="campo inline">
+					<label for="escolaridad">Volumen de líquidos ingeridos en últimas 24 horas</label>
+					<input type="text" id="Volumen de líquidos ingeridos en últimas 24 horas">
+				</div>
+			</div>
+		</div>
+		<!-- quinta sección -->
+	<div class="contenedor-secciones">
+		<div class="seccion">
+				<h5>B. Requisitos de Desvío de la Salud</h5>
+				<div class="campo inline">
+					<label for="escolaridad">Signos de déficit de líquidos: (Sed, oliguria, alteración del estado mental, etc</label>
+					<input type="text" id="Signos">
+				</div>
+				<div class="campo inline">
+					<label for="escolaridad">Edema. Describa lugar y grado</label>
+					<input type="text" id="Edema">
+				</div>
+				<p> Para evaluar Haga presión firme con un dedo sobre el dorso del pie por 5 seg.</p>
+				<table class="escala-edema">
+					<tr>
+						<th>Grado</th>
+						<th>CLASIFICACIÓN DE EDEMA SEGÚN SEVERIDAD</th>
+					</tr>
+					<tr>
+						<td>I</td>
+						<td>No depresión o fóvea escasamente visible</td>
+					</tr>
+					<tr>
+						<td>II</td>
+						<td>Fóvea de menos de 5 mm. sin pérdida de contornos</td>
+					</tr>
+					<tr>
+						<td>III</td>
+						<td>Fóvea de 5 a 10 mm. con pérdida de contornos</td>
+					</tr>
+					<tr>
+						<td>IV</td>
+						<td>Fóvea de más de 10 mm. con pérdida de contornos</td>
+					</tr>
+				</table>
+		</div>
+		<!-- sexta sección -->
+		<div class="seccion">
+				<p> Para evaluar Haga presión firme con un dedo sobre el dorso del pie por 5 seg.</p>
+				<table class="escala-edema">
+					<tr>
+						<th>Grado</th>
+						<th>CLASIFICACIÓN DE EDEMA SEGÚN SEVERIDAD</th>
+					</tr>
+					<tr>
+						<td>I</td>
+						<td>No depresión o fóvea escasamente visible</td>
+					</tr>
+					<tr>
+						<td>II</td>
+						<td>Fóvea de menos de 5 mm. sin pérdida de contornos</td>
+					</tr>
+					<tr>
+						<td>III</td>
+						<td>Fóvea de 5 a 10 mm. con pérdida de contornos</td>
+					</tr>
+					<tr>
+						<td>IV</td>
+						<td>Fóvea de más de 10 mm. con pérdida de contornos</td>
+					</tr>
+				</table>
+			<button onclick="imprimirPagina()">Descargar o Imprimir</button>
+				
+			<script>
+				function imprimirPagina() {
+					window.print();
+				}
+			</script>
+		</div>
     </div>
 </body>
 </html>
