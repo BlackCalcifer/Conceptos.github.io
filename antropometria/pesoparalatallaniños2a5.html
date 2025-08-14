@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Peso para la talla de 0 a 2 años</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+        }
+        .contenedor {
+            width: 750px;
+            max-width: 100%;
+            text-align: center;
+        }
+        h2 { font-size: 18px; margin-bottom: 15px; }
+        label {
+            display: block;
+            margin-top: 8px;
+            font-size: 13px;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 6px;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        .formulario {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            margin-bottom: 20px;
+        }
+        .formulario div {
+            display: flex;
+            flex-direction: column;
+        }
+        .botones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .botones button {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            background-color: #fff;
+            margin-top: 20px;
+        }
+        @media print {
+            .botones { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="contenedor" id="contenido">
+    <h2>Registrar Datos del Paciente</h2>
+    <div class="formulario">
+        <div>
+            <label for="nombre">Nombre del paciente:</label>
+            <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+        </div>
+        <div>
+            <label for="edad">Edad (años y meses):</label>
+            <input type="text" id="edad" placeholder="Ej: 1 año 2 meses">
+        </div>
+        <div>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha">
+        </div>
+        <div>
+            <label for="enfermero">Enfermero/a que valora:</label>
+            <input type="text" id="enfermero" placeholder="Ej: María Gómez">
+        </div>
+        <div>
+            <label for="talla">Talla (cm):</label>
+            <input type="number" id="talla" min="45" max="110">
+        </div>
+        <div>
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" min="0" max="34" step="0.1">
+        </div>
+    </div>
+
+    <div class="botones">
+        <button onclick="agregarDato()">Agregar Dato</button>
+        <button onclick="borrarDatos()">Borrar Datos</button>
+        <button onclick="window.print()">Imprimir</button>
+    </div>
+
+    <h2>Peso para la talla en niños de 2 a 5 años</h2>
+    <canvas id="grafico" width="700" height="600"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('grafico').getContext('2d');
+
+    const tallas = [65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120]; 
+    const percentil1 = [6.0, 6.8, 7.6, 8.4, 9.3, 10.3, 11.1, 12.1, 13.2, 14.4, 15.7, 17.1]; //-3
+    const percentil2 = [6.4, 7.3, 8.2, 9.0, 9.9, 11.0, 12.0, 13.1, 14.3, 15.6, 17.0, 18.6]; // -2 
+    const percentil3 = [6.9, 7.9, 8.8, 9.7, 10.7, 11.9, 13, 14.2, 15.5, 17, 18.6, 20.4]; //-1
+    const percentil4 = [7.5, 8.5, 9.6, 10.5, 11.6, 12.9, 14, 15.4, 16.9, 18.5, 20.4, 22.3]; // 0
+    const percentil5 = [8.1, 9.3, 10.5, 11.5, 12.7, 14.0, 15.3, 16.7, 18.4, 20.3, 22.3, 24,6]; // 1
+    const percentil6 = [8.9, 10.1, 11.5, 12.6, 13.8, 15.2, 16.6, 18.1, 20.0, 22.3, 24.6, 27.1]; // 2
+    const percentil7 = [9.6, 11.1, 12.5, 13.7, 15, 16.5, 18.1, 19.9, 22, 24.5, 27.1, 30.1]; // 3
+
+    const pacientes = [];
+
+    const data = {
+        labels: tallas,
+        datasets: [
+            {
+                label: '1',
+                data: percentil1, //nombre da la cualidad
+                borderColor: 'red', //color
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil1.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'red', //color
+                    font: { size: 10 },
+                    formatter: () => '-3' //color
+                }
+            },
+            {
+                label: '2',
+                data: percentil2,
+                borderColor: 'red',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                borderDash: [5, 5], // rallitas
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil2.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'red',
+                    font: { size: 10 },
+                    formatter: () => '-2'
+                }
+            },
+            {
+                label: '3',
+                data: percentil3,
+                borderColor: 'orange',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil3.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'orange',
+                    font: { size: 10 },
+                    formatter: () => '-1'
+                }
+            },
+            {
+                label: '4',
+                data: percentil4,
+                borderColor: 'green',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil4.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'green',
+                    font: { size: 10 },
+                    formatter: () => '0'
+                }
+            },
+            {
+                label: '5',
+                data: percentil5,
+                borderColor: 'orange',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil5.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'orange',
+                    font: { size: 10 },
+                    formatter: () => '+1'
+                }
+            },
+            {
+                label: '6',
+                data: percentil6,
+                borderColor: 'red',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                borderDash: [5, 5],
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil6.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'red',
+                    font: { size: 10 },
+                    formatter: () => '+2'
+                }
+            },
+            {
+                label: '7',
+                data: percentil7,
+                borderColor: 'red',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil7.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'red',
+                    font: { size: 10 },
+                    formatter: () => '+3'
+                }
+            },
+            {
+                label: 'Paciente',
+                data: [],
+                borderColor: 'black',
+                backgroundColor: 'black',
+                pointRadius: 3,
+                type: 'scatter',
+                showLine: false,
+                datalabels: {
+                    align: 'top',
+                    anchor: 'end',
+                    color: 'black',
+                    font: {
+                        weight: 'bold',
+                        size: 10
+                    },
+                    formatter: (value, context) => {
+                        const index = context.dataIndex;
+                        const paciente = pacientes[index];
+                        return [
+                            `Nombre: ${paciente.nombre}`,
+                            `Edad: ${paciente.edad}`,
+                            `Fecha: ${paciente.fecha}`,
+                            `Enfermero/a: ${paciente.enfermero}`,
+                            `Talla: ${paciente.talla} cm`,
+                            `Peso: ${paciente.peso} kg`
+                        ];
+                    }
+                }
+            }
+        ]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            layout: {
+                padding: { right: 30 }
+            },
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    display: ctx => ctx.dataset.label === 'Paciente'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => {
+                            if (ctx.dataset.label === 'Paciente') {
+                                const p = pacientes[ctx.dataIndex];
+                                return [
+                                    `Nombre: ${p.nombre}`,
+                                    `Edad: ${p.edad}`,
+                                    `Fecha: ${p.fecha}`,
+                                    `Enfermero/a: ${p.enfermero}`,
+                                    `Talla: ${p.talla} cm`,
+                                    `Peso: ${p.peso} kg`
+                                ];
+                            }
+                            return null;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Talla (cm)' },
+                    min: 65,
+                    max: 120,
+                    ticks: { stepSize: 5 }
+                },
+                y: {
+                    title: { display: true, text: 'Peso (kg)' },
+                    min: 4,
+                    max: 32,
+                    ticks: { stepSize: 1 }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
+
+    const grafico = new Chart(ctx, config);
+
+    function agregarDato() {
+        const nombre = document.getElementById('nombre').value;
+        const edad = document.getElementById('edad').value;
+        const fecha = document.getElementById('fecha').value;
+        const enfermero = document.getElementById('enfermero').value;
+        const talla = parseFloat(document.getElementById('talla').value);
+        const peso = parseFloat(document.getElementById('peso').value);
+
+        if (!nombre || !edad || !fecha || !enfermero || isNaN(talla) || isNaN(peso)) {
+            alert('Por favor, complete todos los campos correctamente.');
+            return;
+        }
+
+        pacientes.push({ nombre, edad, fecha, enfermero, talla, peso });
+        config.data.datasets[7].data.push({ x: talla, y: peso }); // Dataset 'Paciente'
+        grafico.update();
+    }
+
+    function borrarDatos() {
+        pacientes.length = 0;
+        config.data.datasets[7].data = [];
+        grafico.update();
+    }
+</script>
+
+</body>
+</html>

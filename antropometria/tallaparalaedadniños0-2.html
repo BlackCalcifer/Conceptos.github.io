@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>longitudcm para la Edad de 0 a 2 años</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            baccmround-color: #fff;
+            display: flex;
+            justify-content: center;
+        }
+        .contenedor {
+            width: 750px;
+            max-width: 100%;
+            text-align: center;
+        }
+        h2 { font-size: 18px; margin-bottom: 15px; }
+        label {
+            display: block;
+            margin-top: 8px;
+            font-size: 13px;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 6px;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        .formulario {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            margin-bottom: 20px;
+        }
+        .formulario div {
+            display: flex;
+            flex-direction: column;
+        }
+        .botones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .botones button {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            baccmround-color: #fff;
+            margin-top: 20px;
+        }
+        @media print {
+            .botones { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="contenedor" id="contenido">
+    <h2>Registrar Datos del Paciente</h2>
+    <div class="formulario">
+        <div>
+            <label for="nombre">Nombre del paciente:</label>
+            <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+        </div>
+        <div>
+            <label for="edad">Edad (años y meses):</label>
+            <input type="text" id="edad" placeholder="Ej: 1 año 2 meses">
+        </div>
+        <div>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha">
+        </div>
+        <div>
+            <label for="enfermero">Enfermero/a que valora:</label>
+            <input type="text" id="enfermero" placeholder="Ej: María Gómez">
+        </div>
+        <div>
+            <label for="Edad">Edad:</label>
+            <input type="number" id="Edad" min="45" max="110">
+        </div>
+        <div>
+            <label for="longitudcm">longitudcm (cm):</label>
+            <input type="number" id="longitudcm" min="0" max="34" step="0.1">
+        </div>
+    </div>
+
+    <div class="botones">
+        <button onclick="agregarDato()">Agregar Dato</button>
+        <button onclick="borrarDatos()">Borrar Datos</button>
+        <button onclick="window.print()">Imprimir</button>
+    </div>
+
+    <h2>Talla para la Edad en niños de 0 a 2 años</h2>
+    <canvas id="grafico" width="700" height="350"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('grafico').getContext('2d');
+
+    const longitud =   [0,  2,    4,  6,  8,  10, 12, 14, 16, 18, 20, 22, 24];
+    const percentil1 = [46, 54.5, 59.5, 63.6, 66, 69, 71, 73, 75, 77, 78.5, 80, 82];
+    const percentil2 = [48, 56.5, 62, 65.2, 68.2, 71, 73.1, 75.3, 77.8, 79.8, 81.1, 83, 84.9];
+    const percentil3 = [50, 59, 64, 67.9, 71, 73, 76, 78, 80, 82, 84, 86, 88];
+    const percentil4 = [52, 60.3, 66, 70, 73, 75.3, 78, 80.3, 83, 85, 87, 89, 91];
+    const percentil5 = [54, 62.3, 68, 72, 75, 78, 80.2, 83, 85.2, 88, 90, 92, 94];
+
+    const pacientes = [];
+
+    const data = {
+        labels: longitud,
+        datasets: [
+            {
+                label: '1',
+                data: percentil1,
+                borderColor: 'red',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+				// cubicInterpolationMode: 'monotone',
+				borderDash: [5, 5],
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil1.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'red',
+                    font: { size: 10 },
+                    formatter: () => '-2'
+                }
+            },
+            {
+                label: '2',
+                data: percentil2,
+                borderColor: 'orange',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil2.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'orange',
+                    font: { size: 10 },
+                    formatter: () => '-1'
+                }
+            },
+            {
+                label: '3',
+                data: percentil3,
+                borderColor: 'green',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil3.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'green',
+                    font: { size: 10 },
+                    formatter: () => '-0'
+                }
+            },
+            {
+                label: '4',
+                data: percentil4,
+                borderColor: 'black',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil4.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'black',
+                    font: { size: 10 },
+                    formatter: () => '+1'
+                }
+            },
+            {
+                label: '5',
+                data: percentil5,
+                borderColor: 'black',
+                borderWidth: 1,
+                fill: false,
+                pointRadius: 0,
+                tension: 0.4,
+                datalabels: {
+                    display: ctx => ctx.dataIndex === percentil5.length - 1,
+                    align: 'right',
+                    anchor: 'end',
+                    color: 'black',
+                    font: { size: 10 },
+                    formatter: () => '+2'
+                }
+            },
+            {
+                label: 'Paciente',
+                data: [],
+                borderColor: 'black',
+                baccmroundColor: 'black',
+                pointRadius: 3,
+                type: 'scatter',
+                showLine: false,
+                datalabels: {
+                    align: 'top',
+                    anchor: 'end',
+                    color: 'black',
+                    font: {
+                        weight: 'bold',
+                        size: 10
+                    },
+                    formatter: (value, context) => {
+                        const index = context.dataIndex;
+                        const paciente = pacientes[index];
+                        return [
+                            `Nombre: ${paciente.nombre}`,
+                            `Edad: ${paciente.edad}`,
+                            `Fecha: ${paciente.fecha}`,
+                            `Enfermero/a: ${paciente.enfermero}`,
+                            `Edad: ${paciente.Edad} cm`,
+                            `longitudcm: ${paciente.longitudcm} cm`
+                        ];
+                    }
+                }
+            }
+        ]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            layout: {
+                padding: { right: 30 }
+            },
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    display: ctx => ctx.dataset.label === 'Paciente'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => {
+                            if (ctx.dataset.label === 'Paciente') {
+                                const p = pacientes[ctx.dataIndex];
+                                return [
+                                    `Nombre: ${p.nombre}`,
+                                    `Edad: ${p.edad}`,
+                                    `Fecha: ${p.fecha}`,
+                                    `Enfermero/a: ${p.enfermero}`,
+                                    `Edad: ${p.Edad} cm`,
+                                    `longitudcm: ${p.longitudcm} cm`
+                                ];
+                            }
+                            return null;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Edad (meses)' },
+                    min: 0,
+                    max: 24,
+                    ticks: { stepSize: 2 }
+                },
+                y: {
+                    title: { display: true, text: 'longitudcm (cm)' },
+                    min: 45,
+                    max: 100,
+                    ticks: { stepSize: 5 }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
+
+    const grafico = new Chart(ctx, config);
+
+    function agregarDato() {
+        const nombre = document.getElementById('nombre').value;
+        const edad = document.getElementById('edad').value;
+        const fecha = document.getElementById('fecha').value;
+        const enfermero = document.getElementById('enfermero').value;
+        const Edad = parseFloat(document.getElementById('Edad').value);
+        const longitudcm = parseFloat(document.getElementById('longitudcm').value);
+
+        if (!nombre || !edad || !fecha || !enfermero || isNaN(Edad) || isNaN(longitudcm)) {
+            alert('Por favor, complete todos los campos correctamente.');
+            return;
+        }
+
+        pacientes.push({ nombre, edad, fecha, enfermero, Edad, longitudcm });
+        config.data.datasets[5].data.push({ x: Edad, y: longitudcm }); // Dataset 'Paciente'
+        grafico.update();
+    }
+
+    function borrarDatos() {
+        pacientes.length = 0;
+        config.data.datasets[5].data = [];
+        grafico.update();
+    }
+</script>
+
+</body>
+</html>

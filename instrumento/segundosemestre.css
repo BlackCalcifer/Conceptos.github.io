@@ -1,0 +1,276 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 10;
+    padding: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+.titulo {
+    text-align: center;
+    font-size: 24px; /* Aumenté el tamaño del título */
+    font-weight: bold;
+    color: red;
+    margin-bottom: 20px;
+}
+
+.contenedor-secciones {
+    display: flex;
+    gap: 10px; /* Espacio entre secciones */
+    width: 90vw;
+    height: auto; /* Evita que tenga un alto fijo */
+}
+
+.contenedor-secciones1 {
+    display: flex;
+    gap: 10px; /* Espacio entre secciones */
+    width: 90vw;
+    height: auto; /* Evita que tenga un alto fijo */
+}
+
+
+.seccion {
+    border: 1px solid black;
+    padding: 20px; /* Aumenté el padding */
+    margin-bottom: 15px;
+    border-radius: 5px;
+    flex: 1; /* Cada sección ocupa el mismo espacio */
+	font-size: 12px; /* Aumenté el tamaño del título */
+	
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 1px;
+	border-radius: 2px;
+    margin-top: 2px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 6px; /* Ajusta el espacio interno */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.fila {
+    display: flex;
+    gap: 15px; /* Aumenté el espacio entre campos */
+    margin-top: 10px;
+}
+
+.campo {
+    flex: 1;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px; /* Aumenté el padding */
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px; /* Aumenté el margen superior */
+    font-size: 16px; /* Aumenté el tamaño de la fuente */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p {
+    font-size: 1.25em; /* 1.5 veces el tamaño predeterminado */
+}
+
+h4 {
+    font-size: 17px; /* 1.5 veces el tamaño predeterminado */
+}
+
+h5 {
+    font-size: 15px; /* 1.5 veces el tamaño predeterminado */
+    margin-top: 3px;
+	margin-bottom: 3px; /* Margen abajo */
+}
+
+.titulo {
+    font-size: 25px; /* Ajusta el tamaño según lo necesites */
+    color: red;
+}
+.campo.inline {
+    display: flex;
+    align-items: center; /* Alinea el texto y el textarea en la misma línea */
+    gap: 10px; /* Espacio entre el label y el textarea */
+}
+
+.campo.inline label {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+.campo.inline textarea {
+    flex: 1; /* Permite que el textarea ocupe el espacio disponible */
+    width: auto; /* Evita que el textarea tenga un ancho del 100% */
+}
+@media print {
+    .contenedor-secciones {
+        page-break-before: always; /* Rompe la página antes de cada contenedor */
+        break-before: page; /* Alternativa para navegadores modernos */
+    }
+
+    body {
+        background-color: white; /* Asegura que no haya color de fondo en la impresión */
+    }
+
+    button {
+        display: none; /* Oculta los botones en la impresión */
+    }
+}
+/* Estilos generales de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+th, td {
+    border: 2px solid black;
+    padding: 1px; /* Mantiene filas angostas */
+    text-align: center;
+    height: 20px;
+    position: relative; /* Para que los input no se salgan de la celda */
+}
+
+th {
+    background-color: lightgray;
+}
+
+/* Ajuste de input para ocupar toda la celda */
+td input {
+    width: 100%; /* Ahora el input ocupa todo el ancho */
+    height: 100%; /* También ocupa todo el alto */
+    font-size: 12px;
+    border: none;
+    text-align: left;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+}
+
+td input:focus {
+    outline: none;
+    background-color: #e6f7ff;
+}
+
+/* Ajuste del ancho de las columnas */
+th:nth-child(1), td:nth-child(1), /* Primera columna (Nombre) */
+th:nth-child(4), td:nth-child(4) { /* Cuarta columna (Hace cuánto lo toma?) */
+    width: 30%;
+}
+
+th:nth-child(2), td:nth-child(2) { /* Segunda columna (Dosis) */
+    width: 20%;
+}
+
+th:nth-child(3), td:nth-child(3) { /* Tercera columna (Vía) */
+    width: 10%;
+}
+/* Ajuste del ancho de las columnas */ 
+table.escala-barczak {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.escala-barczak th, 
+table.escala-barczak td {
+    border: 2px solid black;
+    padding: 2px;
+    text-align: left;
+}
+
+table.escala-barczak th {
+    background-color: lightgray;
+}
+
+/* Ajusta el ancho de las columnas solo para esta tabla */
+table.escala-barczak th:nth-child(1), 
+table.escala-barczak td:nth-child(1) { /* Primera columna (Grado) */
+    width: 20%;
+    max-width: 50px; /* Limita su tamaño */
+    text-align: center;
+}
+
+table.escala-barczak th:nth-child(2), 
+table.escala-barczak td:nth-child(2) { /* Segunda columna (Descripción) */
+    width: 80%;
+}
+table.escala-braden {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table.escala-braden th, 
+table.escala-braden td {
+	border: 2px solid black;
+	padding: 2px;
+	text-align: left;
+}
+
+table.escala-braden th {
+	background-color: lightgray;
+	text-align: center;
+}
+
+/* Ajusta el ancho de la primera columna */
+table.escala-braden th:nth-child(1), 
+table.escala-braden td:nth-child(1) {
+	width: 30%;
+	max-width: 150px;
+}
+
+/* Ajusta el ancho de las columnas de puntuación */
+table.escala-braden th:nth-child(n+2), 
+table.escala-braden td:nth-child(n+2) {
+	width: 17.5%;
+	text-align: center;
+}
+
+/* Ajuste especial para la fila de interpretación */
+.interpretacion td {
+	text-align: center;
+	font-weight: bold;
+}
+
+table.escala-edema {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table.escala-edema th, 
+table.escala-edema td {
+	border: 1px solid black;
+	padding: 2px;
+	text-align: left;
+}
+
+table.escala-edema th {
+	background-color: lightgray;
+	text-align: center;
+}
+
+/* Ajuste del ancho de la columna Grado */
+table.escala-edema th:nth-child(1), 
+table.escala-edema td:nth-child(1) {
+	width: 20%;
+	max-width: 50px;
+	text-align: center;
+}
+
+/* Ajuste del ancho de la columna Descripción */
+table.escala-edema th:nth-child(2), 
+table.escala-edema td:nth-child(2) {
+	width: 80%;
+}

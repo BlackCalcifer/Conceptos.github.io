@@ -1,0 +1,54 @@
+/* antropometria.css */
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 img {
+    max-width: 200px;
+}
+
+.semestres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.semestres button {
+    background-color: #007BFF; /* Azul */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.semestres button:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #555;
+}
+
+h1 img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}

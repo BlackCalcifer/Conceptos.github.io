@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrumento de Valoración</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<link rel="stylesheet" href="segundosemestre.css">
+</head>
+<body>
+    <div class="formulario">
+        <div class="titulo" style="color: red;" >UNIVERSIDAD DE LOS LLANOS<br>FACULTAD DE CIENCIAS DE LA SALUD<br>PROGRAMA DE ENFERMERÍA</div>
+        <h4>INSTRUMENTO PARA VALORACIÓN DEL INDIVIDUO ADULTO POR PATRONES FUNCIONALES CON APLICACIÓN DE LA
+			TEORÍA DE AUTOCUIDADO DE OREM</h4>
+		<p><b>Instrumento elaborado por Luz Helena Aponte Garzón y Fabiola Hernández Páez en el segundo semestre de 2009, a partir del Instrumento Guía para
+				Valoración del Individuo Adulto. Unillanos. Combinación de Patrones Funcionales de Marjory Gordon y Examen Físico, elaborado por las profesoras
+				Martha Huertas, Luz Helena Aponte, Marina Quintero, Departamento de Salud Comunitaria, 1991.
+		</b></p>
+		<h4>PROPÓSITO</h4>		
+		<p> Valorar a la persona (agente de auto - cuidado) en los aspectos relacionados con su salud física, emocional, social, nivel y potencialidades de desarrollo, con el
+				fin de identificar el déficit de auto - cuidado, establecer los requisitos de auto - cuidado (de desviación de la salud, universales y de desarrollo) y por último
+				determinar las demandas de auto - cuidado terapéutico. 
+		</p>
+		<h4>DESCRIPCIÓN</h4>		
+		<p> El instrumento de valoración fue construido siguiendo el orden de los patrones funcionales de salud propuestos por Marjory Gordon, integrando a cada uno de
+			ellos los requisitos de auto -cuidado establecidos en la Teoría de Auto - cuidado de Dorothea Orem. El fin último de la presentación de este nuevo instrumento
+			es facilitar el uso de la Taxonomía NANDA NIC – NOC en la aplicación del Proceso de Enfermería, puesto que la Taxonomía está organizada desde la
+			perspectiva de patrones de Gordon.
+		</p>
+		<h4>INSTRUCTIVO DE USO</h4>		
+		<p> Este instrumento ha sido diseñado para la valoración del agente de autocuidado por parte de los estudiantes del Programa de Enfermería de la Universidad de
+			los Llanos en un escenario de carácter clínico-asistencial. Cada patrón incluye la valoración de aspectos relacionados con los Requisitos de Autocuidado
+			identificando lo específico de los requisitos universales, requisitos de desarrollo y requisitos de desvío de la salud. El instrumento incluye preguntas abiertas que
+			permiten obtener información completa acerca de circunstancias específicas, y preguntas cerradas en donde se recolecta información en forma concreta. La
+			recolección de la información requiere de la aplicación de técnicas de valoración física y de identificación de actitudes y comportamientos del agente de
+			autocuidado, frente al proceso de salud-enfermedad.
+			Se espera que el uso de este instrumento refuerce la aplicación del lenguaje propuesto por la Teoría de Orem y facilite el uso y comprensión de los principios y
+			conceptos de esta teoría. En este sentido, fortalece la formación de los estudiantes del Programa, aumenta la comprensión de los avances en el conocimiento
+			disciplinar y contribuye a la aplicación de la teoría en la práctica profesional, mejorando la calidad del cuidado de enfermería a partir de la determinación
+			sistemática de las demandas terapéuticas de autocuidado, lo cual permitirá orientar de mejor manera los resultados esperados y las intervenciones de
+			enfermería, que apoyan el desarrollo de la persona y las acciones que favorecen la vida, la salud y el bienestar.
+		</p>
+        <div class="formulario">
+        <div class="titulo">FORMULARIO DE VALORACIÓN DE AGENTES DE AUTOCUIDADO</div>
+        <div class="contenedor-secciones1">
+            <!-- Primera sección -->
+            <div class="seccion">
+                <h5>INFORMACIÓN BÁSICA</h5>
+                <label>Fecha de Valoración:</label>
+                <input type="date" id="fecha">
+                
+                <label>Nombre del Agente de Autocuidado (Ag-Ac.):</label>
+                <input type="text" id="nombre_agente">
+                
+                <div class="fila">
+                    <div class="campo inline">
+                        <label>No. HC:</label>
+                        <input type="text" id="num_hc">
+                    </div>
+                    <div class="campo inline">
+                        <label>Servicio:</label>
+                        <input type="text" id="servicio">
+                    </div>
+                    <div class="campo inline">
+                        <label>Unidad:</label>
+                        <input type="text" id="unidad">
+                    </div>
+                </div>
+                
+                <h5>Factores condicionantes básicos del agente de autocuidado</h5>
+				<div class="fila">
+                    <div class="campo inline">
+                        <label>Edad:</label>
+                        <input type="number" id="edad">
+                    </div>
+					<div class="campo inline">
+						<label for="sexo">Sexo:</label>
+						<select id="sexo" name="sexo">
+							<option value="">Seleccione...</option>
+							<option value="M">M</option>
+							<option value="F">F</option>
+						</select>
+					</div>
+                    <div class="campo inline">
+                        <label>Estado civil:</label>
+                        <input type="text" id="Estado civil">
+                    </div>
+					<div class="campo inline">
+                        <label>Estrato:</label>
+                        <input type="number" id="Estrato">
+                    </div>
+                </div>
+				<div class="fila">
+                    <div class="campo inline">
+                        <label>Lugar de nacimiento:</label>
+                        <input type="number" id="Lugar de nacimiento">
+                    </div>
+                    <div class="campo inline">
+                        <label>Procedencia:</label>
+                        <input type="text" id="Procedencia">
+                    </div>
+                </div>
+				<div class="fila">
+                    <div class="campo inline">
+                        <label>Nivel educativo:</label>
+                        <input type="number" id="Nivel educativo">
+                    </div>
+                    <div class="campo inline">
+                        <label>Ocupación:</label>
+                        <input type="text" id="Ocupacion">
+                    </div>
+                </div>
+				<div class="fila">
+					<div class="campo inline">
+						<label for="afiliacion">Tipo de afiliación al SGSSS:</label>
+						<select id="afiliacion" name="afiliacion">
+							<option value="">Seleccione...</option>
+							<option value="contributivo">Contributivo</option>
+							<option value="subsidiado">Subsidiado</option>
+							<option value="no_afiliado">No afiliado</option>
+						</select>
+					</div>
+					<div class="campo inline">
+                        <label>Eps:</label>
+                        <input type="text" id="Eps">
+                    </div>
+				</div>
+				<div class="campo inline">
+					<label for="convive">¿Con quién vive?</label>
+					<input type="text" id="convive">
+				</div>
+
+				<div class="campo inline">
+					<label for="cuidador">Agente de cuidado dependiente:</label>
+					<input type="text" id="cuidador">
+				</div>
+
+				<div class="campo inline">
+					<label for="relacion">Relación del Ag- Ac con el Ag. de cuidado dependiente:</label>
+					<input type="text" id="relacion">
+				</div>
+
+				<div class="fila">
+					<div class="campo inline">
+						<label for="edad">Edad:</label>
+						<input type="number" id="edad">
+					</div>
+					<div class="campo inline">
+						<label for="escolaridad">Escolaridad:</label>
+						<input type="text" id="escolaridad">
+					</div>
+					<div class="campo inline">
+						<label for="ocupacion">Ocupación:</label>
+						<input type="text" id="ocupacion">
+					</div>
+				</div>
+
+				<div class="campo inline">
+					<label for="direccion">Dirección del Ag. de cuidado dependiente:</label>
+					<input type="text" id="direccion">
+				</div>
+
+				<div class="campo inline">
+					<label for="telefono">Teléfono del Ag. de cuidado dependiente:</label>
+					<input type="tel" id="telefono">
+				</div>
+
+				<div class="campo inline">
+					<label for="tiempo_cuidado">Hace cuánto está dando el cuidado?</label>
+					<input type="text" id="tiempo_cuidado">
+				</div>
+
+				<div class="campo inline">
+					<label>¿Considera que cumple bien con su rol de cuidador?</label>
+						<select id="rol" name="rol">
+							<option value="">Seleccione...</option>
+							<option value="SI">SI</option>
+							<option value="NO">NO</option>
+						</select>
+				</div>
+
+				<div class="campo inline">
+					<label for="textarea">¿Qué apoyo requiere para mejorar su habilidad como cuidador?:</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+				<div class="campo inline">
+					<label for="textarea">MOTIVO PRINCIPAL DE DESVÍO DE LA SALUD:</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+				<div class="campo inline">
+					<label for="textarea">Ampliación del motivo principal:</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+                <!-- <label>Edad:</label>
+                <input type="number" id="edad">
+                
+                <label>Sexo:</label>
+                <input type="text" id="sexo">-->
+            </div>
+
+            <!-- Segunda sección -->
+            <div class="seccion">
+				<h4>1. PATRÓN DE PERCEPCIÓN Y MANEJO DE LA SALUD</h4>
+				<p></p>
+				<h5>A. Requisitos Universales: Prevención de peligros para la vida y el bienestar y Promoción del funcionamiento y desarrollo humano.</h5>
+				<p></p>
+				<div class="campo">
+					<label for="textarea">Personal: (Alérgicos, toxicológicos, traumáticos, hospitalarios, quirúrgicos)</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+				<div class="campo">
+					<label for="textarea">Aparatos de uso permanente: (Prótesis, anteojos, audífonos, muletas, etc.)</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+				<div class="fila">
+					<div class="campo inline">
+						<label>Se considera Ud. una persona saludable?</label>
+							<select id="rol" name="rol">
+								<option value="">Seleccione...</option>
+								<option value="SI">SI</option>
+								<option value="NO">NO</option>
+							</select>
+					</div>
+					<div class="campo inline">
+						<label for="textarea">Amplie:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+				</div>
+				<div class="campo inline">
+						<label for="textarea">Qué hace para proteger su salud?:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+						<label for="textarea">Qué peligros para su salud existen en su vivienda y su comunidad?:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+						<label for="textarea">Qué peligros para su salud existen en su vivienda y su comunidad?:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+                        <label>¿Hace cuánto fue el último control médico o de enfermería?:</label>
+                        <input type="text" id="Ocupacion">
+                    </div>
+					<p></p>
+					<h5>B. Requisitos de desvío de la salud</h5>
+					<p></p>
+					<div class="campo inline">
+						<label for="textarea">¿Qué hace cuando se enferma?:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+						<label for="textarea">¿Qué conoce sobre su enfermedad actual?</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+						<label>¿Está tomando algún medicamento actualmente?</label>
+							<select id="rol" name="rol">
+								<option value="">Seleccione...</option>
+								<option value="SI">SI</option>
+								<option value="NO">NO</option>
+								<option value="NO APLICA">NO APLICA</option>
+							</select>
+					</div>
+			</div>
+    </div>
+	<!-- tercera sección -->
+	<div class="contenedor-secciones1">
+            <!-- Primera sección -->
+            <div class="seccion">
+                <h5>INFORMACIÓN BÁSICA</h5>
+                <label>Fecha de Valoración:</label>
+                <input type="date" id="fecha">
+                
+                <label>Nombre del Agente de Autocuidado (Ag-Ac.):</label>
+                <input type="text" id="nombre_agente">
+                
+                <div class="fila">
+                    <div class="campo inline">
+                        <label>No. HC:</label>
+                        <input type="text" id="num_hc">
+                    </div>
+                    <div class="campo inline">
+                        <label>Servicio:</label>
+                        <input type="text" id="servicio">
+                    </div>
+                    <div class="campo inline">
+                        <label>Unidad:</label>
+                        <input type="text" id="unidad">
+                    </div>
+                </div>
+                
+                <h5>Factores condicionantes básicos del agente de autocuidado</h5>
+				<div class="fila">
+                    <div class="campo inline">
+                        <label>Edad:</label>
+                        <input type="number" id="edad">
+                    </div>
+					<div class="campo inline">
+						<label for="sexo">Sexo:</label>
+						<select id="sexo" name="sexo">
+							<option value="">Seleccione...</option>
+							<option value="M">M</option>
+							<option value="F">F</option>
+						</select>
+					</div>
+                    <div class="campo inline">
+                        <label>Estado civil:</label>
+                        <input type="text" id="Estado civil">
+                    </div>
+					<div class="campo inline">
+                        <label>Estrato:</label>
+                        <input type="number" id="Estrato">
+                    </div>
+                </div>
+				<div class="fila">
+                    <div class="campo inline">
+                        <label>Lugar de nacimiento:</label>
+                        <input type="number" id="Lugar de nacimiento">
+                    </div>
+                    <div class="campo inline">
+                        <label>Procedencia:</label>
+                        <input type="text" id="Procedencia">
+                    </div>
+                </div>
+				<div class="fila">
+                    <div class="campo inline">
+                        <label>Nivel educativo:</label>
+                        <input type="number" id="Nivel educativo">
+                    </div>
+                    <div class="campo inline">
+                        <label>Ocupación:</label>
+                        <input type="text" id="Ocupacion">
+                    </div>
+                </div>
+				<div class="fila">
+					<div class="campo inline">
+						<label for="afiliacion">Tipo de afiliación al SGSSS:</label>
+						<select id="afiliacion" name="afiliacion">
+							<option value="">Seleccione...</option>
+							<option value="contributivo">Contributivo</option>
+							<option value="subsidiado">Subsidiado</option>
+							<option value="no_afiliado">No afiliado</option>
+						</select>
+					</div>
+					<div class="campo inline">
+                        <label>Eps:</label>
+                        <input type="text" id="Eps">
+                    </div>
+				</div>
+				<div class="campo inline">
+					<label for="convive">¿Con quién vive?</label>
+					<input type="text" id="convive">
+				</div>
+
+				<div class="campo inline">
+					<label for="cuidador">Agente de cuidado dependiente:</label>
+					<input type="text" id="cuidador">
+				</div>
+
+				<div class="campo inline">
+					<label for="relacion">Relación del Ag- Ac con el Ag. de cuidado dependiente:</label>
+					<input type="text" id="relacion">
+				</div>
+
+				<div class="fila">
+					<div class="campo inline">
+						<label for="edad">Edad:</label>
+						<input type="number" id="edad">
+					</div>
+					<div class="campo inline">
+						<label for="escolaridad">Escolaridad:</label>
+						<input type="text" id="escolaridad">
+					</div>
+					<div class="campo inline">
+						<label for="ocupacion">Ocupación:</label>
+						<input type="text" id="ocupacion">
+					</div>
+				</div>
+
+				<div class="campo inline">
+					<label for="direccion">Dirección del Ag. de cuidado dependiente:</label>
+					<input type="text" id="direccion">
+				</div>
+
+				<div class="campo inline">
+					<label for="telefono">Teléfono del Ag. de cuidado dependiente:</label>
+					<input type="tel" id="telefono">
+				</div>
+
+				<div class="campo inline">
+					<label for="tiempo_cuidado">Hace cuánto está dando el cuidado?</label>
+					<input type="text" id="tiempo_cuidado">
+				</div>
+
+				<div class="campo inline">
+					<label>¿Considera que cumple bien con su rol de cuidador?</label>
+						<select id="rol" name="rol">
+							<option value="">Seleccione...</option>
+							<option value="SI">SI</option>
+							<option value="NO">NO</option>
+						</select>
+				</div>
+
+				<div class="campo inline">
+					<label for="textarea">¿Qué apoyo requiere para mejorar su habilidad como cuidador?:</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+				<div class="campo inline">
+					<label for="textarea">MOTIVO PRINCIPAL DE DESVÍO DE LA SALUD:</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+				<div class="campo inline">
+					<label for="textarea">Ampliación del motivo principal:</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+                <!-- <label>Edad:</label>
+                <input type="number" id="edad">
+                
+                <label>Sexo:</label>
+                <input type="text" id="sexo">-->
+            </div>
+
+            <!-- Segunda sección -->
+            <div class="seccion">
+				<h4>1. PATRÓN DE PERCEPCIÓN Y MANEJO DE LA SALUD</h4>
+				<p></p>
+				<h5>A. Requisitos Universales: Prevención de peligros para la vida y el bienestar y Promoción del funcionamiento y desarrollo humano.</h5>
+				<p></p>
+				<div class="campo">
+					<label for="textarea">Personal: (Alérgicos, toxicológicos, traumáticos, hospitalarios, quirúrgicos)</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+				<div class="campo">
+					<label for="textarea">Aparatos de uso permanente: (Prótesis, anteojos, audífonos, muletas, etc.)</label>
+					<textarea id="textarea" rows="3"></textarea>
+				</div>
+				<div class="fila">
+					<div class="campo inline">
+						<label>Se considera Ud. una persona saludable?</label>
+							<select id="rol" name="rol">
+								<option value="">Seleccione...</option>
+								<option value="SI">SI</option>
+								<option value="NO">NO</option>
+							</select>
+					</div>
+					<div class="campo inline">
+						<label for="textarea">Amplie:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+				</div>
+				<div class="campo inline">
+						<label for="textarea">Qué hace para proteger su salud?:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+						<label for="textarea">Qué peligros para su salud existen en su vivienda y su comunidad?:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+						<label for="textarea">Qué peligros para su salud existen en su vivienda y su comunidad?:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+                        <label>¿Hace cuánto fue el último control médico o de enfermería?:</label>
+                        <input type="text" id="Ocupacion">
+                    </div>
+					<p></p>
+					<h5>B. Requisitos de desvío de la salud</h5>
+					<p></p>
+					<div class="campo inline">
+						<label for="textarea">¿Qué hace cuando se enferma?:</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+						<label for="textarea">¿Qué conoce sobre su enfermedad actual?</label>
+						<textarea id="textarea" rows="3"></textarea>
+					</div>
+					<div class="campo inline">
+						<label>¿Está tomando algún medicamento actualmente?</label>
+							<select id="rol" name="rol">
+								<option value="">Seleccione...</option>
+								<option value="SI">SI</option>
+								<option value="NO">NO</option>
+								<option value="NO APLICA">NO APLICA</option>
+							</select>
+					</div>
+			</div>
+    </div>
+		<button onclick="imprimirPagina()">Descargar o Imprimir</button>
+				
+			<script>
+				function imprimirPagina() {
+					window.print();
+				}
+			</script>
+		</div>
+    </div>
+</body>
+</html>

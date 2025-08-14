@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora de Gases Arteriales (ABG)</title>
+  <style>
+/* ================================
+   Variables de color y tema (Light)
+   ================================ */
+:root {
+  --bg: #f9fafb;        /* Fondo principal - gray-50 */
+  --card: #ffffff;      /* Fondo de tarjetas - blanco */
+  --muted: #6b7280;     /* Texto secundario - gray-500 */
+  --text: #111827;      /* Texto principal - gray-900 */
+  --accent: #0ea5e9;    /* Azul acento - sky-500 */
+  --good: #059669;      /* Verde - emerald-600 */
+  --warn: #d97706;      /* Amarillo - amber-600 */
+  --bad: #dc2626;       /* Rojo - red-600 */
+}
+
+/* ================================
+   Reseteo y base tipográfica
+   ================================ */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  background: radial-gradient(1200px 800px at 10% 0%, #f1f5f9, #f9fafb);
+  color: var(--text);
+}
+
+/* ================================
+   Contenedores y títulos
+   ================================ */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.title {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ================================
+   Sistema de grid
+   ================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.results {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .results {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   Tarjetas y elementos de entrada
+   ================================ */
+.card {
+  background: var(--card);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 90px 80px;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 10px;
+}
+
+.row label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.row input,
+.row select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  color: var(--text);
+  outline: none;
+}
+
+.unit {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  padding-right: 8px;
+}
+
+.helper {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ================================
+   Botones y acciones
+   ================================ */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+button {
+  appearance: none;
+  border: none;
+  background: linear-gradient(180deg, var(--accent), #0284c7);
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.25);
+}
+
+button.secondary {
+  background: #f3f4f6;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text);
+}
+
+/* ================================
+   Badges y estados
+   ================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 13px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.good .dot { background: var(--good); }
+.warn .dot { background: var(--warn); }
+.bad  .dot { background: var(--bad); }
+
+/* ================================
+   Utilidades y detalles
+   ================================ */
+.accent { color: var(--accent); }
+.mono   { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; }
+.small  { font-size: 12px; color: var(--muted); }
+.list   { line-height: 1.6; }
+
+.hr {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
+  margin: 14px 0;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Calculadora de interpretación de gases arteriales</div>
+    <div class="subtitle">Ingresa los datos del obtenidos.</div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Gases arteriales</h3>
+        <div class="row">
+          <div>
+            <label for="ph">pH</label>
+            <input id="ph" type="number" step="0.001" placeholder="7.40" value="7.40" />
+          </div>
+          <div class="unit">—</div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="paco2">PaCO₂</label>
+            <input id="paco2" type="number" step="0.1" placeholder="40" value="40" />
+          </div>
+          <div class="unit">mmHg</div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="hco3">HCO₃⁻</label>
+            <input id="hco3" type="number" step="0.1" placeholder="24" value="24" />
+          </div>
+          <div class="unit">mEq/L</div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="pao2">PaO₂ <span class="helper">(opcional)</span></label>
+            <input id="pao2" type="number" step="0.1" placeholder="90" />
+          </div>
+          <div class="unit">mmHg</div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="fio2">FiO₂ <span class="helper">(0.21=aire)</span></label>
+            <input id="fio2" type="number" step="0.01" placeholder="0.21" value="0.21" />
+          </div>
+          <div class="unit">fracción</div>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Electrolitos y otros</h3>
+        <div class="row">
+          <div>
+            <label for="na">Na⁺</label>
+            <input id="na" type="number" step="0.1" placeholder="140" value="140" />
+          </div>
+          <div class="unit">mEq/L</div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="cl">Cl⁻</label>
+            <input id="cl" type="number" step="0.1" placeholder="104" value="104" />
+          </div>
+          <div class="unit">mEq/L</div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="alb">Albúmina <span class="helper">(opcional)</span></label>
+            <input id="alb" type="number" step="0.1" placeholder="4.0" />
+          </div>
+          <div class="unit">g/dL</div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="lac">Lactato <span class="helper">(opcional)</span></label>
+            <input id="lac" type="number" step="0.1" placeholder="1.0" />
+          </div>
+          <div class="unit">mmol/L</div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="age">Edad <span class="helper">(A–a)</span></label>
+            <input id="age" type="number" step="1" placeholder="30" />
+          </div>
+          <div class="unit">años</div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="calc">Calcular</button>
+      <button class="secondary" id="demo">Ejemplo</button>
+      <span class="small">Referencias de normalidad: pH 7.35–7.45, PaCO₂ 35–45 mmHg, HCO₃⁻ 22–26 mEq/L, AG normal≈12±4 (albúmina 4 g/dL).</span>
+    </div>
+
+    <div class="results">
+      <div class="card" id="interpretacion">
+        <h3>Interpretación</h3>
+        <div id="summary"></div>
+        <div class="hr"></div>
+        <div id="details" class="list"></div>
+      </div>
+      <div class="card">
+        <h3>Cálculos</h3>
+        <div id="calcs" class="mono small"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function num(v){const x=parseFloat(v);return isNaN(x)?null:x}
+    function within(x,a,b){return x>=a && x<=b}
+
+    function compute(){
+      const ph=num(document.getElementById('ph').value)
+      const paco2=num(document.getElementById('paco2').value)
+      const hco3=num(document.getElementById('hco3').value)
+      const pao2=num(document.getElementById('pao2').value)
+      const fio2=num(document.getElementById('fio2').value) || 0.21
+      const na=num(document.getElementById('na').value)
+      const cl=num(document.getElementById('cl').value)
+      const alb=num(document.getElementById('alb').value)
+      const lac=num(document.getElementById('lac').value)
+      const age=num(document.getElementById('age').value)
+
+      const calcsEl=document.getElementById('calcs')
+      const summaryEl=document.getElementById('summary')
+      const detailsEl=document.getElementById('details')
+
+      if([ph,paco2,hco3,na,cl].some(v=>v===null)){
+        summaryEl.innerHTML = `<span class="badge bad"><span class="dot"></span> Faltan valores obligatorios.</span>`
+        detailsEl.textContent=''
+        calcsEl.textContent='—'
+        return
+      }
+
+      // Estado ácido-base primario
+      let state = 'equilibrio'
+      if(ph<7.35) state='acidemia'
+      else if(ph>7.45) state='alcalemia'
+
+      // Sospecha de proceso primario
+      let primary = 'indeterminado'
+      if(state==='acidemia'){
+        if(hco3<22 && paco2<=45) primary='acidosis metabólica'
+        else if(paco2>45 && hco3>=22) primary='acidosis respiratoria'
+        else{
+          // elegir por desviación relativa
+          const dH = Math.abs(hco3-24)/24
+          const dC = Math.abs(paco2-40)/40
+          primary = dH>=dC ? 'acidosis metabólica (probable mixta)' : 'acidosis respiratoria (probable mixta)'
+        }
+      }else if(state==='alcalemia'){
+        if(hco3>26 && paco2>=35) primary='alcalosis metabólica'
+        else if(paco2<35 && hco3<=26) primary='alcalosis respiratoria'
+        else{
+          const dH = Math.abs(hco3-24)/24
+          const dC = Math.abs(paco2-40)/40
+          primary = dH>=dC ? 'alcalosis metabólica (probable mixta)' : 'alcalosis respiratoria (probable mixta)'
+        }
+      }else{
+        primary='equilibrio/mixta leve'
+      }
+
+      // Anion gap y corrección por albúmina
+      let ag = null, agc = null
+      ag = na - (cl + hco3)
+      if(alb!=null) agc = ag + 2.5*(4 - alb)
+
+      // Delta-gap (si AG alto)
+      let deltaAG=null, deltaHCO3=null, deltaEval=null
+      const refAG = (alb!=null)? (12 + 2.5*(alb-4)) : 12
+      if(ag > refAG){
+        deltaAG = ag - refAG
+        deltaHCO3 = 24 - hco3
+        if(deltaAG - deltaHCO3 > 3){
+          deltaEval = 'AG elevado con exceso de ΔAG sobre ΔHCO₃ → acidosis metabólica con <b>alcalosis metabólica</b> concomitante.'
+        }else if(deltaHCO3 - deltaAG > 3){
+          deltaEval = 'AG elevado pero ΔHCO₃ mayor que ΔAG → acidosis metabólica de <b>brecha mixta</b> (AG alto + hiperclorémica).'
+        }else{
+          deltaEval = 'Relación ΔAG ≈ ΔHCO₃: acidosis metabólica de brecha aniónica pura.'
+        }
+      }
+
+      // Compensación esperada
+      let compNote='', compBadges=''
+      function badge(cls,txt){return `<span class="badge ${cls}"><span class="dot"></span>${txt}</span>`}
+
+      if(primary.includes('metabólica')){
+        if(primary.includes('acidosis')){
+          const exp = 1.5*hco3 + 8
+          const lo = exp - 2, hi = exp + 2
+          if(within(paco2, lo, hi)) compBadges += badge('good', `Compensación respiratoria adecuada (PaCO₂ esp: ${exp.toFixed(1)}±2)`) 
+          else if(paco2>hi) compBadges += badge('bad', `Hipoventilación mayor a lo esperado → acidosis respiratoria concomitante`)
+          else compBadges += badge('bad', `Hiperventilación mayor a lo esperado → alcalosis respiratoria concomitante`)
+          compNote = `Fórmula de Winter: PaCO₂ esp = 1.5×HCO₃ + 8 ± 2`
+        }else{ // alcalosis metabólica
+          const exp = 0.7*hco3 + 20
+          const lo = exp - 5, hi = exp + 5
+          if(within(paco2, lo, hi)) compBadges += badge('good', `Compensación respiratoria adecuada (PaCO₂ esp: ${exp.toFixed(1)}±5)`) 
+          else if(paco2>hi) compBadges += badge('warn', `Hipoventilación excesiva → acidosis respiratoria concomitante`)
+          else compBadges += badge('warn', `Hiperventilación excesiva → alcalosis respiratoria concomitante`)
+          compNote = `PaCO₂ esp ≈ 0.7×HCO₃ + 20 ± 5`
+        }
+      }else if(primary.includes('respiratoria')){
+        const d = paco2 - 40
+        if(primary.includes('acidosis')){
+          const expAc = 24 + (d/10)*1
+          const expCh = 24 + (d/10)*3.5
+          const nearer = Math.abs(hco3-expAc) <= Math.abs(hco3-expCh) ? 'aguda' : 'crónica'
+          const exp = nearer==='aguda'?expAc:expCh
+          const tol = nearer==='aguda'?2:4
+          if(within(hco3, exp - tol, exp + tol)) compBadges += badge('good', `Compensación ${nearer} apropiada (HCO₃ esp ≈ ${exp.toFixed(1)}±${tol})`)
+          else compBadges += badge('bad', `Compensación inadecuada → trastorno metabólico concomitante`)
+          compNote=`Resp. acidosis: HCO₃ +1 (aguda) o +3.5 (crónica) por cada +10 mmHg PaCO₂`
+        }else{ // alcalosis respiratoria
+          const d2 = 40 - paco2
+          const expAc = 24 - (d2/10)*2
+          const expCh = 24 - (d2/10)*4
+          const nearer = Math.abs(hco3-expAc) <= Math.abs(hco3-expCh) ? 'aguda' : 'crónica'
+          const exp = nearer==='aguda'?expAc:expCh
+          const tol = nearer==='aguda'?2:4
+          if(within(hco3, exp - tol, exp + tol)) compBadges += badge('good', `Compensación ${nearer} apropiada (HCO₃ esp ≈ ${exp.toFixed(1)}±${tol})`)
+          else compBadges += badge('bad', `Compensación inadecuada → trastorno metabólico concomitante`)
+          compNote=`Resp. alcalosis: HCO₃ −2 (aguda) o −4 (crónica) por cada −10 mmHg PaCO₂`
+        }
+      }
+
+      // Alveolo-arterial (si PaO2)
+      let Aa=null, PAO2=null, AaNote=null
+      if(pao2!=null){
+        const Patm=760, PH2O=47, R=0.8
+        PAO2 = fio2*(Patm-PH2O) - (paco2/R)
+        Aa = PAO2 - pao2
+        if(age!=null){
+          const normalAa = (age/4) + 4
+          AaNote = `A–a = ${Aa.toFixed(1)} mmHg; esperado ≤ ${(normalAa).toFixed(1)} (edad)`
+        }else{
+          AaNote = `A–a = ${Aa.toFixed(1)} mmHg` 
+        }
+      }
+
+      // Ensamblar salida
+      let summaryHTML = ''
+      summaryHTML += badge(state==='equilibrio'?'good':(state==='acidemia'?'bad':'warn'), `Estado: ${state}`)
+      summaryHTML += badge('accent', `Primario: ${primary}`)
+      if(ag!=null){
+        const agShow = alb!=null? (ag.toFixed(1)+` (corr. ${(agc).toFixed(1)})`) : ag.toFixed(1)
+        const agCls = (ag > refAG+2)?'bad': (ag < (refAG-2)?'warn':'good')
+        summaryHTML += badge(agCls, `Brecha aniónica: ${agShow}`)
+      }
+      if(Aa!=null){
+        const normalAa = age!=null? (age/4 + 4) : 15
+        const cls = Aa>normalAa? 'bad':'good'
+        summaryHTML += badge(cls, `Gradiente A–a: ${Aa.toFixed(1)}`)
+      }
+      if(lac!=null){
+        summaryHTML += badge(lac>2?'bad':'good', `Lactato: ${lac.toFixed(1)}`)
+      }
+      summaryHTML += compBadges
+      summaryEl.innerHTML = summaryHTML
+
+      let detailHTML = ''
+      detailHTML += `<div><b>Interpretación principal:</b> ${primary} con ${state}.</div>`
+      if(compNote) detailHTML += `<div class="small">${compNote}</div>`
+      if(deltaEval) detailHTML += `<div class="hr"></div><div>${deltaEval}</div>`
+      if(AaNote) detailHTML += `<div class="hr"></div><div>${AaNote}</div>`
+
+      detailsEl.innerHTML = detailHTML
+
+      // Cálculos detallados
+      let calcText = ''
+      calcText += `AG = Na − (Cl + HCO₃) = ${na.toFixed(1)} − (${cl.toFixed(1)} + ${hco3.toFixed(1)}) = ${ag.toFixed(1)} mEq/L\n`
+      if(alb!=null){
+        calcText += `AG corregido (alb ${alb.toFixed(1)}) = AG + 2.5×(4 − alb) = ${(agc).toFixed(1)} mEq/L\n`
+      }
+      if(deltaAG!=null){
+        calcText += `ΔAG = ${deltaAG.toFixed(1)}; ΔHCO₃ = ${deltaHCO3.toFixed(1)}\n`
+      }
+      if(pao2!=null){
+        calcText += `PAO₂ = FiO₂×(760−47) − PaCO₂/0.8 = ${(PAO2).toFixed(1)} mmHg\n`
+        calcText += `A–a = PAO₂ − PaO₂ = ${(Aa).toFixed(1)} mmHg\n`
+      }
+      calcsEl.textContent = calcText || '—'
+    }
+
+    document.getElementById('calc').addEventListener('click', compute)
+    document.getElementById('demo').addEventListener('click', ()=>{
+      document.getElementById('ph').value = 7.28
+      document.getElementById('paco2').value = 28
+      document.getElementById('hco3').value = 13
+      document.getElementById('pao2').value = 85
+      document.getElementById('fio2').value = 0.21
+      document.getElementById('na').value = 140
+      document.getElementById('cl').value = 108
+      document.getElementById('alb').value = 3.5
+      document.getElementById('lac').value = 4.2
+      document.getElementById('age').value = 30
+      compute()
+    })
+
+    // Auto-calcular una vez al cargar
+    compute()
+  </script>
+</body>
+</html>

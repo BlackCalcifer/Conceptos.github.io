@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos</title>
+    <link rel="stylesheet" href="index.css">
+	<script defer src="index.js"></script>
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById("preloader").style.display = "none";
+                document.querySelector(".container").style.display = "block";
+            }, 3000);
+        };
+    </script>
+</head>
+<body>
+    <div id="preloader">
+        <img src="unillanos.png" alt="Cargando...">
+        <img src="conceptos.png" alt="Cargando...">
+    </div>
+    
+    <div class="container">
+        <h1>
+            <img src="conceptos.png" alt="Conceptos">
+        </h1>
+        <div class="semestres">
+            <button onclick="window.location.href='calculadora/calculadora.html'">calculadora de dosis</button>
+            <button onclick="window.location.href='instrumento/instrumento.html'">intrumento de valoracion</button>
+            <button onclick="window.location.href='antropometria/antropometria.html'">Antropometria</button>
+            <button onclick="window.location.href='gases/gases.html'">Calculadora de Gases</button>
+        </div>
+        <footer>
+            <p>By Juan S. & Natalia C.</p>
+        </footer>
+    </div>
+</body>
+</html>
