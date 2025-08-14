@@ -8,6 +8,45 @@
 	<script defer src="index.js"></script>
 </head>
 <body>
+<!-- Botón que lleva a otra página -->
+<button type="button" class="back-btn" aria-label="Volver" onclick="history.back()">
+  <img src="atras.png" alt="Atrás">
+</button>
+
+<style>
+  .back-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;          
+    height: 50px;         
+  }
+  .back-btn img {
+    width: 30px;  
+    height: 30px;
+    object-fit: contain;
+    pointer-events: none;
+
+  /* Versión para pantallas pequeñas */
+  @media (max-width: 600px) {
+    .back-btn {
+      top: 8px;
+      left: 8px;
+      width: 40px;
+      height: 40px;
+      padding: 4px;
+    }
+    .back-btn img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+</style>
+
     <div class="container">
         <h1>
             <img src="conceptos.png" alt="Conceptos">
